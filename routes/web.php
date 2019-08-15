@@ -20,7 +20,6 @@ Auth::routes();
 Route::get('/', 'Auth\LoginController@showLoginForm'); //Reset Password
 
 
-Route::get('/home', 'HomeController@index')->name('dashboard');
 
 
 Route::prefix('suppliers')->group(function () {

@@ -6,14 +6,6 @@
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
 
-            <li class="active">
-                <a href="{{route('dashboard')}}">
-                    <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-
-                </a>
-
-            </li>
-
 
             <li class="active">
                 <a href="{{route('suppliers')}}">
@@ -38,6 +30,14 @@
                 </a>
 
             </li>
+            <li class="active">
+                <a href="{{route('suppliers.payment')}}">
+                    <i class="fa fa-money"></i> <span>Users</span>
+
+                </a>
+
+            </li>
+
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-gears"></i> <span>Settings</span>

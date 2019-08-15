@@ -2,18 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use App\Interfaces\ISupplierService;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     /**
+     * @var ISupplierService
+     */
+    private $supplierService;
+
+    /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(ISupplierService $supplierService)
     {
         $this->middleware('auth');
+        $this->supplierService = $supplierService;
     }
 
     /**
@@ -23,6 +30,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+
         return view('dashboard');
     }
 }

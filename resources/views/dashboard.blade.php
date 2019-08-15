@@ -1,20 +1,11 @@
 @extends('layouts.admin_layout')
+@section('title') Dashboard @endsection
+
 @section('content')
 
-    <div class="content-wrapper">
+@section('content')
 
-        <!-- Content Wrapper. Contains page content -->
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <h1 class="text-left">
-                Dashboard
-                <small>Control panel</small>
-            </h1>
 
-        </section>
-
-        <!-- Main content -->
-        <section class="content">
             <!-- Small boxes (Stat box) -->
             <div class="row">
 
@@ -85,10 +76,6 @@
             <!-- /.row -->
             <!-- Main row -->
 
-            <!-- /.row (main row) -->
 
-        </section>
-        <!-- /.content -->
-    </div>
 
 @endsection

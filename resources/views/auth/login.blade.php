@@ -7,9 +7,8 @@
         <div class=" row justify-content-center">
             <div class="col-md-4 ">
 
-                @include('partials.flash')
-                @include('partials.errors')
-                <h2 class="text-danger text-center">Login</h2>
+
+                <h2 class="text-primary text-center">Bakery Manager</h2>
                 <div class="card">
 
                     <div class="card-body">
@@ -25,7 +24,7 @@
                                        value="{{ old('email') }}" required autofocus>
 
                                 @if ($errors->has('email'))
-                                    <span class="help-block">
+                                    <span class="invalid-feedback">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif
@@ -39,7 +38,7 @@
                                 <input id="password" type="password" class="form-control" name="password" required>
 
                                 @if ($errors->has('password'))
-                                    <span class="help-block">
+                                    <span class="invalid-feedback">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
@@ -59,7 +58,7 @@
 
                             <div class="form-group">
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-danger pull-right">
+                                    <button type="submit" class="btn btn-primary pull-right">
                                         Login
                                     </button>
 
