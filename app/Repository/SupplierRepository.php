@@ -83,4 +83,15 @@ class SupplierRepository implements ISupplierRepository
     }
 
 
+    /**
+     * Get Suppliers Information using ID
+     * @param $suppliers_ids
+     * @return mixed
+     */
+    public function getSuppliersByID($suppliers_ids)
+    {
+        return $this->supplier->whereIn('id', $suppliers_ids)->get();
+    }
+
+
 }

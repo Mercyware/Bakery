@@ -66,4 +66,16 @@ class PaymentRepository implements IPaymentRepository
     public function getAPayment($payment_id){
         return $this->payment->where('id',$payment_id)->first();
     }
+
+    public function storeBulkPaymentDetails()
+    {
+
+        return $this->payment->create([
+            'supplier_id' => $attributes->supplier_id,
+            'amount' => $attributes->amount,
+            'transfer_code' => $attributes->transfer_code,
+            'description' => $attributes->description,
+        ]);
+
+    }
 }

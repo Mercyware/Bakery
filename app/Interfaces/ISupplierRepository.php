@@ -4,7 +4,6 @@
 namespace App\Interfaces;
 
 
-
 interface ISupplierRepository
 {
     /**
@@ -26,6 +25,7 @@ interface ISupplierRepository
      * @return mixed
      */
     public function getASupplierBySlug($slug);
+
     /**
      * Add a new Suppler
      * @param $attributes
@@ -42,5 +42,11 @@ interface ISupplierRepository
      */
     public function updateASupplier($attributes, $supplier_id);
 
+    /**
+     * Get Suppliers Information using ID
+     * @param $suppliers_ids
+     * @return mixed
+     */
+    public function getSuppliersByID($suppliers_ids);
 
 }

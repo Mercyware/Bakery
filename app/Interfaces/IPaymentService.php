@@ -34,4 +34,12 @@ interface IPaymentService
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function getAccountBalance();
+
+    /**
+     * Initiate Bulk Transfer to Customer
+     * @param $transfer_details
+     * @return \Exception|mixed|\Psr\Http\Message\ResponseInterface|null
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function initiateBulkTransfer($transfer_details);
 }

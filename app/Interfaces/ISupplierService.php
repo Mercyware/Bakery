@@ -37,4 +37,18 @@ interface ISupplierService
      * @return string
      */
     public function makePaymentToSupplier($attributes, $supplier_id);
+
+    /**
+     * Get Suppliers Information using ID
+     * @param $suppliers_id
+     * @return mixed
+     */
+    public function getSuppliers($suppliers_id);
+
+
+    /**
+     * Make Payment to Selected Multiple Suppliuers
+     * @param $attributes
+     */
+    public function payMultipleSuppliers($attributes);
 }

@@ -51,9 +51,13 @@ class SupplierService implements ISupplierService
 
         $start = 1;
         return DataTables::of($suppliers)
-            ->addColumn('id', function ($suppliers) use (&$start) {
-                return $start++;
+            ->addColumn('check', function ($suppliers) use (&$start) {
+                return '<input type="checkbox" name="selected_suppliers[]" value="' . $suppliers->id . '">';
             })
+
+//            ->addColumn('id', function ($suppliers) use (&$start) {
+//                return $start++;
+//            })
             ->editColumn('amount', function ($suppliers) {
                 return "#" . number_format($suppliers->Supplies->sum('amount') - $suppliers->Payment->sum('amount'));
             })
@@ -61,6 +65,7 @@ class SupplierService implements ISupplierService
                 return '<a href="/suppliers/view/' . $suppliers->id . '" class="btn btn-warning btn-sm">View </a>';
 
             })
+            ->rawColumns(['check', 'action'])
             ->make(true);
     }
 
@@ -92,7 +97,7 @@ class SupplierService implements ISupplierService
             $payment_details = $this->payment->registerTransferRecipient($attributes);
 
 
-            if ( $payment_details->getStatusCode() == 201) { // 201  Created
+            if ($payment_details->getStatusCode() == 201) { // 201  Created
                 $response_data = json_decode($payment_details->getBody()->getContents());
 
                 $attributes->paystack_recipient_code = $response_data->data->recipient_code;
@@ -155,4 +160,78 @@ class SupplierService implements ISupplierService
 
 
     }
+
+    /**
+     * Get Suppliers Information using ID
+     * @param $suppliers_id
+     * @return mixed
+     */
+    public function getSuppliers($suppliers_id)
+    {
+        return $this->supplierRepository->getSuppliersByID($suppliers_id);
+    }
+
+
+    /**
+     * Make Payment to Selected Multiple Suppliuers
+     * @param $attributes
+     */
+    public function payMultipleSuppliers($attributes)
+    {
+
+        $selected_suppliers_id = $attributes->selected_suppliers;
+
+        $transfer_details = array();
+
+        //Check that There is a Selected Supplier
+        if (count($selected_suppliers_id) <= 0) {
+            $message = "Invalid Suppliers Selected. Please Selected a valid Suppliers";
+            $status = false;
+        }
+
+        //Check that The Suppliers aren't getting more than owed
+        $suppliers = $this->supplierRepository->getSuppliersByID($selected_suppliers_id);
+        foreach ($suppliers as $supplier) {
+            //Get Supplier Index
+            $supplier_index = array_search($supplier->id, $selected_suppliers_id);
+
+            $balance = $supplier->Supplies->sum('amount') - $supplier->Payment->sum('amount');
+
+
+            if ($attributes->amount_payed[$supplier_index] > $balance) {
+                $message = "You are trying to pay a supplier more than you owed. Supplier Name  : $supplier->name";
+                $status = false;
+                break;
+            }
+            $transfer_details[] = [
+                'supplier_id' => $supplier->id,
+                "amount" => $attributes->amount_payed[$supplier_index],
+                "recipient" => $supplier->paystack_recipient_code,
+                "description"
+            ];
+
+            array_merge($transfer_details);
+
+        }
+
+        $attributes['suppliers_transfer_details'] = $transfer_details;
+        $response = $this->payment->initiateBulkTransfer($attributes);
+
+        if ($response->getStatusCode() == 200) {
+
+        //Store Supplier Payment information into the Databse
+
+        }
+        dd($response->getBody()->getContents());
+        //  dd($transfer_details);
+
+
+        //Pay Supplier
+
+        $result = array(["status" => $status, "message" => $message]);
+
+        return $result;
+    }
+
+
 }

@@ -137,4 +137,41 @@ class PaymentService implements IPaymentService
         }
 
     }
+
+
+    /**
+     * Initiate Bulk Transfer to Customer
+     * @param $transfer_details
+     * @return \Exception|mixed|\Psr\Http\Message\ResponseInterface|null
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     */
+    public function initiateBulkTransfer($transfer_details)
+    {
+
+
+
+        //Make Http request to Paystack to Create User Transfer Account /
+        $params = [
+            "source" => "balance",
+            "currency" =>"NGN",
+            "transfers" => $transfer_details->suppliers_transfer_details,
+
+
+        ];
+
+        $response = null;
+
+        try {
+            $response = $this->paymentHelper->makeRequest('POST', $params, 'transfer/bulk');
+
+
+            return $response;
+        } catch (\Exception $exception) {
+
+            return $exception;
+
+
+        }
+
+    }
 }

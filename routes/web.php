@@ -27,6 +27,8 @@ Route::prefix('suppliers')->group(function () {
     Route::get('/view/{supplier_id}', 'SupplierController@viewSupplier')->name('suppliers.view');
     Route::post('/store', 'SupplierController@createSupplier')->name('supplier.store');
     Route::post('/pay/{supplier_id}', 'SupplierController@paySupplier')->name('supplier.pay');
+    Route::post('/pay/multiple/suppliers', 'SupplierController@payMultipleSupplier')->name('supplier.pay.multiple');
+    Route::post('/pay/multiple/transfer', 'SupplierController@payAllSuppliers')->name('supplier.pay.multiple.transfer');
 
 });
 

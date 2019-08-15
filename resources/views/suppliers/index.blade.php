@@ -4,23 +4,27 @@
 
 @section('content')
 
-
+    <form action="{{route('supplier.pay.multiple')}}" method="POST">
+    @csrf
     <!-- Suppliers List -->
-    <table class="table table-bordered" id="suppliers">
-        <thead>
-        <tr>
-            <th>S/N</th>
-            <th> Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-            <th>Pending Payment</th>
-            <th></th>
-        </tr>
-        </thead>
+        <table class="table table-bordered" id="suppliers">
+            <thead>
+            <tr>
+                <th>S/N</th>
+                <th> Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Pending Payment</th>
+                <th></th>
+            </tr>
+            </thead>
 
-    </table>
+        </table>
 
-    <!-- End of Suppliers List -->
+        <button type="submit" value="submit">Submit</button>
+        <!-- End of Suppliers List -->
+    </form>
+
 
 
 
@@ -51,7 +55,7 @@
 
                 },
                 columns: [
-                    {data: 'id', name: 'id'},
+                    {data: 'check', name: 'check'},
                     {data: 'name', name: 'name'},
                     {data: 'email', name: 'email'},
                     {data: 'phone', name: 'phone'},

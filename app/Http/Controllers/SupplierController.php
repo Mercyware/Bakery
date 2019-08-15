@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Interfaces\IBankService;
 use App\Interfaces\ISupplierService;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 
 
@@ -108,4 +109,31 @@ class SupplierController extends Controller
         return redirect()->back();
     }
 
+
+    /**
+     * Get A list of Selected Supplier to Pay
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\View\View
+     */
+    public function payMultipleSupplier(Request $request)
+    {
+        $selected_suppliers_id = $request->selected_suppliers;
+
+        if (count($selected_suppliers_id) <= 0)
+            return redirect()->back()->withErrors('Invalid Suppliers Selected. Please Selected a valid Suppliers');
+
+        $suppliers = $this->supplierService->getSuppliers($selected_suppliers_id);
+        return view('suppliers.suppliers_payment', compact('suppliers'));
+    }
+
+    /**
+     * Make Payment to selected Customers
+     * @param Request $request
+     */
+    public function payAllSuppliers(Request $request)
+    {
+        dd($this->supplierService->payMultipleSuppliers($request));
+
+
+    }
 }
