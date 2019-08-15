@@ -21,8 +21,8 @@
 
 
    <VirtualHost *:80>
-      ServerName rotarota.net
-      ServerAlias www.rotarota.net
+      ServerName tranquil-oasis-83188.herokuapp.com
+      ServerAlias tranquil-oasis-83188.herokuapp.com
       Redirect permanent / https://tranquil-oasis-83188.herokuapp.com
    </VirtualHost>
 
