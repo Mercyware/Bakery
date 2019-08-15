@@ -18,6 +18,7 @@ use App\Services\BankService;
 use App\Services\PaymentService;
 use App\Services\SupplierService;
 use App\Services\SupplyService;
+use http\Url;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -71,7 +72,7 @@ class AppServiceProvider extends ServiceProvider
         ISupplierService::class => SupplierService::class,
         ISupplyService::class => SupplyService::class,
         IBankService::class => BankService::class,
-        IPaymentService::class => PaymentService::class,
+
     ];
 
 
