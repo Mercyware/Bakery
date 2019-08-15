@@ -77,6 +77,14 @@
                                 Forgot Your Password?
                             </a></p>
                     </div>
+
+                    <div class="col-md-12">
+                        <h3>Default Login Details</h3>
+                        <p><strong>User :</strong> emmanuel@paystack.com</p>
+                        <p><strong>Password :</strong> password</p>
+
+
+                    </div>
                 </div>
 
 

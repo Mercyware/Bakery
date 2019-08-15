@@ -4,14 +4,13 @@ namespace App\Services;
 
 
 use App\API\PayStackAPI;
+use App\Interfaces\IBankRepository;
 use App\Interfaces\IBankService;
 use App\Interfaces\IPaymentRepository;
-use App\Interfaces\IPaymentService;
 use App\Interfaces\ISupplierRepository;
 use App\Interfaces\ISupplierService;
 use App\Repository\SupplierRepository;
 use GuzzleHttp\Exception\GuzzleException;
-use http\Encoding\Stream\Inflate;
 use Yajra\DataTables\DataTables;
 
 class SupplierService implements ISupplierService
@@ -25,7 +24,7 @@ class SupplierService implements ISupplierService
      * /**
      * @var IBankService
      */
-    private $bankService;
+    private $bankRepository;
     /**
      * @var IPaymentRepository
      */
@@ -39,16 +38,16 @@ class SupplierService implements ISupplierService
      * SupplierService constructor.
      * @param ISupplierRepository $supplierRepository
      * @param PayStackAPI $payStackAPI
-     * @param IBankService $bankService
+     * @param IBankRepository $bankRepository
      * @param IPaymentRepository $paymentRepository
      */
     public function __construct(ISupplierRepository $supplierRepository, PayStackAPI $payStackAPI,
-                                IBankService $bankService,
+                                IBankRepository $bankRepository,
                                 IPaymentRepository $paymentRepository)
     {
         $this->supplierRepository = $supplierRepository;
 
-        $this->bankService = $bankService;
+        $this->bankRepository = $bankRepository;
         $this->paymentRepository = $paymentRepository;
         $this->payStackAPI = $payStackAPI;
     }
@@ -103,7 +102,7 @@ class SupplierService implements ISupplierService
     {
         try {
             //Get  Bank Code
-            $bank = $this->bankService->getABankByBankID($attributes->bank_id);
+            $bank = $this->bankRepository->getABankByBankID($attributes->bank_id);
             $attributes->bank_code = $bank->bank_code;
 
             //Call API to store User details into Paystack API
@@ -143,7 +142,7 @@ class SupplierService implements ISupplierService
     {
         try {
             //Get  Bank Code
-            $bank = $this->bankService->getABankByBankID($attributes->bank_id);
+            $bank = $this->bankRepository->getABankByBankID($attributes->bank_id);
             $attributes->bank_code = $bank->bank_code;
 
             //Call API to store User details into Paystack API
@@ -179,6 +178,7 @@ class SupplierService implements ISupplierService
      * @param $attributes
      * @param $supplier_id
      * @return string
+     * @throws GuzzleException
      */
     public function makePaymentToSupplier($attributes, $supplier_id)
     {

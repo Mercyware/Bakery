@@ -48,7 +48,7 @@ class PayStackAPI
         } catch (\Exception $exception) {
             return $exception;
 
-        }catch (GuzzleException $exception) {
+        } catch (GuzzleException $exception) {
             return $exception;
         }
 
