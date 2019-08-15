@@ -5,7 +5,6 @@ namespace App\Providers;
 use App\Interfaces\IBankRepository;
 use App\Interfaces\IBankService;
 use App\Interfaces\IPaymentRepository;
-use App\Interfaces\IPaymentService;
 use App\Interfaces\ISupplierRepository;
 use App\Interfaces\ISupplierService;
 use App\Interfaces\ISupplyRepository;
@@ -15,10 +14,8 @@ use App\Repository\PaymentRepository;
 use App\Repository\SupplierRepository;
 use App\Repository\SupplyRepository;
 use App\Services\BankService;
-use App\Services\PaymentService;
 use App\Services\SupplierService;
 use App\Services\SupplyService;
-use http\Url;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
@@ -45,7 +42,7 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Schema::defaultStringLength(191);
-        \Illuminate\Support\Facades\URL::forceSchema('https');
+        \URL::forceScheme('https');
 
     }
 
