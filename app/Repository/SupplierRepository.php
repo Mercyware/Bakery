@@ -54,15 +54,19 @@ class SupplierRepository implements ISupplierRepository
      */
     public function addASupplier($attributes)
     {
-        return $this->supplier->create([
-            'name' => $attributes->name,
-            'email' => $attributes->email,
-            'phone' => $attributes->phone,
-            'description' => $attributes->description,
-            'account_number' => $attributes->account_number,
-            'bank_id' => $attributes->bank_id,
-            'paystack_recipient_code' => $attributes->paystack_recipient_code,
-        ]);
+        try{
+            return $this->supplier->create([
+                'name' => $attributes->name,
+                'email' => $attributes->email,
+                'phone' => $attributes->phone,
+                'description' => $attributes->description,
+                'account_number' => $attributes->account_number,
+                'bank_id' => $attributes->bank_id,
+                'paystack_recipient_code' => $attributes->paystack_recipient_code,
+            ]);
+        } catch (\Exception $exception) {
+            return $exception;
+        }
     }
 
 
@@ -74,12 +78,20 @@ class SupplierRepository implements ISupplierRepository
      */
     public function updateASupplier($attributes, $supplier_id)
     {
-        return $this->supplier->where('id', $supplier_id)->update([
-            'name' => $attributes->name,
-            'email' => $attributes->email,
-            'phone' => $attributes->phone,
-            'description' => $attributes->description
-        ]);
+        try {
+            return $this->supplier->where('id', $supplier_id)->update([
+                'name' => $attributes->name,
+                'email' => $attributes->email,
+                'phone' => $attributes->phone,
+                'description' => $attributes->description,
+                'account_number' => $attributes->account_number,
+                'bank_id' => $attributes->bank_id,
+                'paystack_recipient_code' => $attributes->paystack_recipient_code,
+            ]);
+        } catch (\Exception $exception) {
+            return $exception;
+        }
+
     }
 
 

@@ -3,8 +3,8 @@
 @section('description') The list of all your suppliers @endsection
 
 @section('content')
-    <div class="alert alert-info">
-        <p><strong>NB : </strong> Payment beyond the amount owed will be ignored</p>
+    <div class="callout callout-info">
+        <p><strong>NB : </strong> All Suppliers have default amount you owed, you can change it if you choose</p>
     </div>
     <form action="{{route('supplier.pay.multiple.transfer')}}" method="POST">
     @csrf
@@ -28,7 +28,7 @@
 
                     <tr>
 
-                        <td><input type="hidden" name="selected_suppliers[]" value="{{$supplier->id}}">S/N</td>
+                        <td><input type="hidden" name="selected_suppliers[]" value="{{$supplier->id}}">{{++$i}}</td>
                         <td> {{$supplier->name}}</td>
                         <td><input type="hidden" name="amount_owed[]"
                                    value="{{$balance}}">{{number_format($balance)}}
@@ -44,7 +44,9 @@
             </tbody>
         </table>
 
-        <button type="submit" value="submit">Submit</button>
+        <div class="col-12" style="padding-top: 20px">
+            <button type="submit" value="submit" class="btn btn-primary pull-right ">Make Bulk Payment</button>
+        </div>
         <!-- End of Suppliers List -->
     </form>
 

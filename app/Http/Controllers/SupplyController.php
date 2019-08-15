@@ -25,6 +25,7 @@ class SupplyController extends Controller
      */
     public function __construct(ISupplyService $supplyService, ISupplierService $supplierService)
     {
+        $this->middleware('auth');
         $this->supplyService = $supplyService;
         $this->supplierService = $supplierService;
     }

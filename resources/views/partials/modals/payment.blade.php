@@ -24,7 +24,8 @@
                         <div class="form-group ">
                             <label for="description">Transfer Amount</label>
                             <input type="number" class="form-control " id="amount" name="amount"
-                                   placeholder="Enter Amount to Transfer to Supplier" required value="">
+                                   placeholder="Enter Amount to Transfer to Supplier" required value="{{$amount}}"
+                                   min="1" max="{{$amount}}">
 
                         </div>
                     </div>

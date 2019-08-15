@@ -2,24 +2,27 @@
 
 namespace App\Http\Controllers;
 
+use App\API\PayStackAPI;
 use App\Interfaces\IPaymentService;
 use Illuminate\Http\Request;
 
 class SettingController extends Controller
 {
-    //
+
     /**
-     * @var IPaymentService
+     * @var PayStackAPI
      */
-    private $paymentService;
+    private $payStackAPI;
 
     /**
      * SettingController constructor.
-     * @param IPaymentService $paymentService
+     * @param PayStackAPI $payStackAPI
      */
-    public function __construct(IPaymentService $paymentService)
+    public function __construct(PayStackAPI $payStackAPI)
     {
-        $this->paymentService = $paymentService;
+        $this->middleware('auth');
+
+        $this->payStackAPI = $payStackAPI;
     }
 
     /**
@@ -28,7 +31,7 @@ class SettingController extends Controller
      */
     public function accountBalance()
     {
-        $response = $this->paymentService->getAccountBalance();
+        $response = $this->payStackAPI->getAccountBalance();
 
         if (gettype($response) == "integer")
             return view('account.view',compact('response'));

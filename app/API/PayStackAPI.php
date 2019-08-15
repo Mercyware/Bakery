@@ -1,29 +1,23 @@
 <?php
 
-namespace App\Services;
+
+namespace App\API;
 
 
 use App\Helpers\PaymentHelper;
-use App\Interfaces\IPaymentRepository;
-use App\Interfaces\IPaymentService;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Exception\RequestException;
 
-class PaymentService implements IPaymentService
+class PayStackAPI
 {
-
     /**
      * @var PaymentHelper
      */
     private $paymentHelper;
-    /**
-     * @var IPaymentRepository
-     */
-    private $paymentRepository;
 
-    public function __construct(PaymentHelper $paymentHelper, IPaymentRepository $paymentRepository)
+    public function __construct(PaymentHelper $paymentHelper)
     {
         $this->paymentHelper = $paymentHelper;
-        $this->paymentRepository = $paymentRepository;
     }
 
     /**
@@ -54,6 +48,8 @@ class PaymentService implements IPaymentService
         } catch (\Exception $exception) {
             return $exception;
 
+        }catch (GuzzleException $exception) {
+            return $exception;
         }
 
     }
@@ -73,7 +69,7 @@ class PaymentService implements IPaymentService
         $params = [
             "source" => "balance",
             "reason" => $transfer_details->description,
-            "amount" => $transfer_details->amount,
+            "amount" => $transfer_details->amount * 100,
             "recipient" => $transfer_details->recipient_code,
 
         ];
@@ -93,19 +89,6 @@ class PaymentService implements IPaymentService
         }
 
     }
-
-
-    /**
-     * Store Payment into the database
-     * @param $attributes
-     * @return mixed
-     */
-    public function storePayment($attributes)
-    {
-
-        return $this->paymentRepository->storePaymentDetails($attributes);
-    }
-
 
     /**
      * Get Account Balance
@@ -149,11 +132,10 @@ class PaymentService implements IPaymentService
     {
 
 
-
         //Make Http request to Paystack to Create User Transfer Account /
         $params = [
             "source" => "balance",
-            "currency" =>"NGN",
+            "currency" => "NGN",
             "transfers" => $transfer_details->suppliers_transfer_details,
 
 
@@ -174,4 +156,5 @@ class PaymentService implements IPaymentService
         }
 
     }
+
 }

@@ -34,4 +34,12 @@ interface IPaymentRepository
      * @return mixed
      */
     public function getAPayment($payment_id);
+
+
+    /**
+     * Store Bulk User payment into the database
+     * @param $suppliers_details
+     * @return mixed
+     */
+    public function storeBulkPaymentDetails($suppliers_details);
 }

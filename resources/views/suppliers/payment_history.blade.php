@@ -1,6 +1,6 @@
 @extends('layouts.admin_layout')
-@section('title') @if($supplier) {{$supplier->name}} Supplies @else All Supplies @endif @endsection
-@section('description') The list of  your supplies @endsection
+@section('title') @if($supplier) {{$supplier->name}} Payment History @else All Payment History @endif @endsection
+@section('description') The list of  your payment @endsection
 
 @section('content')
 
@@ -11,10 +11,9 @@
         <tr>
             <th>S/N</th>
             <th>Supplier</th>
-            <th>Description</th>
-            <th>Amount</th>
-            <th>Date Delivered</th>
-            <th></th>
+            <th>Amount Paid</th>
+            <th>Date Paid</th>
+
         </tr>
         </thead>
 
@@ -45,16 +44,16 @@
                 processing: true,
                 serverSide: true,
                 ajax: {
-                    url: '{{route("supplies.list",$supplier->id??0)}}'
+                    url: '{{route("suppliers.payment.list",$supplier->id??0)}}'
 
                 },
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'supplier', name: 'supplier'},
-                    {data: 'description', name: 'description'},
+
                     {data: 'amount', name: 'amount'},
-                    {data: 'date_delivered', name: 'date_delivered'},
-                    {data: 'action', name: 'action'},
+                    {data: 'date', name: 'date'},
+
 
                 ],
             });

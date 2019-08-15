@@ -50,7 +50,11 @@
     <a class="btn btn-danger waves-effect waves-light remove-record  btn-md "
        data-toggle="modal"
        data-url="{{route('supply.store')}}"
-       data-id="{{$supply->id}}" data-target="#custom-width-modal"> Supplies History</a>
+       data-id="{{$supply->id}}" data-target="#custom-width-modal"> Supply History</a>
+
+
+    <a class="btn btn-primary waves-effect waves-light remove-record  btn-md"
+       href="{{route('suppliers.view',$supply->Supplier->id)}}">{{$supply->Supplier->name}} Profile </a>
 @endsection
 
 

@@ -3,7 +3,9 @@
 @section('description') The list of all your suppliers @endsection
 
 @section('content')
-
+    <div class="callout callout-info"><i class="fa fa-info-circle"></i> For Bulk Transfer, Select suppliers and click on
+        the Make Bulk Payment Button
+    </div>
     <form action="{{route('supplier.pay.multiple')}}" method="POST">
     @csrf
     <!-- Suppliers List -->
@@ -20,12 +22,13 @@
             </thead>
 
         </table>
+        <div class="col-12" style="padding-top: 20px">
+            <button type="submit" value="submit" class="btn btn-primary pull-right ">Continue to Make Bulk Payment
+            </button>
+        </div>
 
-        <button type="submit" value="submit">Submit</button>
         <!-- End of Suppliers List -->
     </form>
-
-
 
 
 @endsection

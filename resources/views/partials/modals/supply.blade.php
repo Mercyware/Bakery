@@ -49,7 +49,7 @@
                         <div class="form-group ">
                             <label for="more_details">More Details (Optional)</label>
                             <textarea class="form-control " id="more_details" name="more_details"
-                                      placeholder="Provide more details about the supplies" required></textarea>
+                                      placeholder="Provide more details about the supplies"></textarea>
 
                         </div>
                     </div>

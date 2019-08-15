@@ -57,19 +57,21 @@
 
     <!-- New Supply Popup Form -->
     @include('partials.modals.supply',['supplier'=>$supplier])
-    @include('partials.modals.payment',['supplier'=>$supplier, 'amount'=>1000])
+    @include('partials.modals.payment',['supplier'=>$supplier, 'amount'=>$balance])
 
 
 @endsection
 @section('buttons')
+
+    @include('partials.buttons.supplier_buttons',['supplier'=>$supplier])
+
     <a class="btn btn-primary waves-effect waves-light remove-record  btn-md "
        data-toggle="modal"
        data-url="{{route('supply.store')}}"
        data-id="{{$supplier->id}}" data-target="#custom-width-modal"> New Supply</a>
 
 
-    <a class="btn btn-danger waves-effect waves-light remove-record  btn-md"
-       href="{{route('supplies',$supplier->id)}}"> Supplies History</a>
+
 
     @if($balance > 0)
         <a class="btn btn-primary waves-effect waves-light remove-record  btn-md "
@@ -77,8 +79,9 @@
            data-url="{{route('supply.store')}}"
            data-id="{{$supplier->id}}" data-target="#payment-modal"> Make Payment</a>
     @endif
-    <a class="btn btn-danger waves-effect waves-light remove-record  btn-md"
-       href="{{route('supplies',$supplier->id)}}"> Payment History</a>
+
+
+
 @endsection
 
 

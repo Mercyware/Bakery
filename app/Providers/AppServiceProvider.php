@@ -74,6 +74,7 @@ class AppServiceProvider extends ServiceProvider
         IPaymentService::class => PaymentService::class,
     ];
 
+
     /**
      *Biding Repository interfaces to the definitions
      */

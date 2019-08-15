@@ -44,7 +44,7 @@ class SupplyService implements ISupplyService
             $supplies = $this->supplyRepository->getAllSupplies();
 
         }
-        $supplies = $this->supplyRepository->getAllSupplies();
+
 
 
         $start = 1;
@@ -58,6 +58,9 @@ class SupplyService implements ISupplyService
             })
             ->editColumn('supplier', function ($supplies) {
                 return ucwords($supplies->Supplier->name);
+
+            }) ->editColumn('amount', function ($supplies) {
+                return number_format($supplies->amount);
 
             })
             ->editColumn('action', function ($supplies) {

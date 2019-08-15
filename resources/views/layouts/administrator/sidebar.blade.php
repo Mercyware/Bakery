@@ -32,7 +32,7 @@
             </li>
 
             <li class="active">
-                <a href="{{route('supplies')}}">
+                <a href="{{route('suppliers.payment')}}">
                     <i class="fa fa-money"></i> <span>Payment</span>
 
                 </a>

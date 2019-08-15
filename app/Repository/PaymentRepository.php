@@ -53,8 +53,9 @@ class PaymentRepository implements IPaymentRepository
      * @param $supplier_id
      * @return mixed
      */
-    public function getPaymentsBySupplierId($supplier_id){
-        return $this->payment->where('supplier_id',$supplier_id)->get();
+    public function getPaymentsBySupplierId($supplier_id)
+    {
+        return $this->payment->where('supplier_id', $supplier_id)->get();
     }
 
 
@@ -63,19 +64,28 @@ class PaymentRepository implements IPaymentRepository
      * @param $payment_id
      * @return mixed
      */
-    public function getAPayment($payment_id){
-        return $this->payment->where('id',$payment_id)->first();
+    public function getAPayment($payment_id)
+    {
+        return $this->payment->where('id', $payment_id)->first();
     }
 
-    public function storeBulkPaymentDetails()
+    /**
+     * Store Bulk User payment into the database
+     * @param $suppliers_details
+     * @return mixed
+     */
+    public function storeBulkPaymentDetails($suppliers_details)
     {
 
-        return $this->payment->create([
-            'supplier_id' => $attributes->supplier_id,
-            'amount' => $attributes->amount,
-            'transfer_code' => $attributes->transfer_code,
-            'description' => $attributes->description,
-        ]);
+        foreach ($suppliers_details as $supplier) {
+            $this->payment->create([
+                'supplier_id' => $supplier['supplier_id'],
+                'amount' => $supplier['amount'] / 100,
+                'transfer_code' => $supplier['recipient'],
+                'description' => "Bulk Payment",
+            ]);
+        }
+
 
     }
 }

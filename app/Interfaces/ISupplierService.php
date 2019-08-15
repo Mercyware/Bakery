@@ -29,6 +29,13 @@ interface ISupplierService
      */
     public function createSupplier($attributes);
 
+    /**
+     * Update Supplier Record
+     * @param $attributes
+     * @param $supplier_id
+     * @return string
+     */
+    public function updateSupplierDetails($attributes, $supplier_id);
 
     /**
      * Make Payment and store information in database
@@ -51,4 +58,10 @@ interface ISupplierService
      * @param $attributes
      */
     public function payMultipleSuppliers($attributes);
+
+    /**
+     * @param $supplier_id
+     * @return mixed
+     */
+    public function getAllSuppliersPaymentHistoryToDataTable($supplier_id);
 }
