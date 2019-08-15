@@ -30,13 +30,7 @@
                 </a>
 
             </li>
-            <li class="active">
-                <a href="{{route('suppliers.payment')}}">
-                    <i class="fa fa-money"></i> <span>Users</span>
 
-                </a>
-
-            </li>
 
             <li class="treeview">
                 <a href="#">

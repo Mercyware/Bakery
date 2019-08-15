@@ -17,7 +17,7 @@
         </div>
 
         <div class="col-md-12">
-            <p><strong>Amount: </strong> {{number_format($supply->amount) }}</p>
+            <p><strong>Amount: </strong># {{number_format($supply->amount) }}</p>
         </div>
 
 
