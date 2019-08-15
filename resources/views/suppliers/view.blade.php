@@ -33,7 +33,7 @@
         </div>
 
         <div class="col-md-12">
-            <p><strong>Date Registered: </strong> {{$supplier->created_at->format('l jS \\of F Y ) }}</p>
+            <p><strong>Date Registered: </strong> {{$supplier->created_at->format('l jS \\of F Y ') }}</p>
         </div>
 
         <div class="col-md-12">

@@ -22,7 +22,7 @@
 
 
         <div class="col-md-12">
-            <p><strong>Date Delivered: </strong> {{$supply->date_delivered->toString() }}</p>
+            <p><strong>Date Delivered: </strong> {{$supply->date_delivered->format('l jS \\of F Y ') }}</p>
         </div>
 
 
